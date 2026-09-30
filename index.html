@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desmos | Graphing Calculator</title>
+    <link id="favicon" rel="icon" type="image/x-icon" href="https://gstatic.com">
+    <style>
+        * { box-sizing: border-box; }
+        body { 
+            background-color: #0b0c10; 
+            color: #c5c6c7; 
+            font-family: 'Segoe UI', Roboto, sans-serif; 
+            margin: 0; 
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+        }
+        .sidebar {
+            width: 320px;
+            min-width: 320px;
+            background: #1f2833;
+            border-right: 2px solid #45f3ff;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .sidebar-header {
+            padding: 15px;
+            border-bottom: 1px solid #2a3542;
+            text-align: center;
+        }
+        .sidebar-header h1 {
+            color: #66fcf1;
+            font-size: 1.4rem;
+            margin: 0 0 10px 0;
+            text-shadow: 0 0 10px rgba(102, 252, 241, 0.4);
+        }
+        .btn-cloak {
+            background: #ff007f;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        #searchBar {
+            width: 100%;
+            padding: 10px;
+            font-size: 0.9rem;
+            border-radius: 20px;
+            border: 2px solid #45f3ff;
+            background: #0b0c10;
+            color: white;
+            outline: none;
+        }
+        .game-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+        }
+        .category-title {
+            color: #45f3ff;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 15px 0 5px 5px;
+            font-weight: bold;
+        }
+        .game-btn {
+            background: #2a3542;
+            color: #ffffff;
+            border: 1px solid #121212;
+            padding: 10px;
+            margin-bottom: 6px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 0.9rem;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .game-btn:hover {
+            background: #45f3ff;
+            color: #0b0c10;
+            font-weight: bold;
+        }
+        .main-content {
+            flex: 1;
+            height: 100%;
+            background: #0b0c10;
+            display: flex;
+            flex-direction: column;
+        }
+        .welcome-screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            color: #45f3ff;
+            padding: 20px;
+            text-align: center;
+        }
+        .game-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #000;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h1>⚡ PROTOCOL v6.0</h1>
+            <button class="btn-cloak" onclick="cloakTab()">⚠️ EMERGENCY CLOAK</button>
+            <input type="text" id="searchBar" onkeyup="filterGames()" placeholder="Search 56 games...">
+        </div>
+        
+        <div class="game-list" id="gameList">
+            <div class="category-title">🔥 Featured & Battle Royale</div>
+            <button class="game-btn" onclick="loadGame('https://gitlab.io')">🪂 Fortzone BR</button>
+            <button class="game-btn" onclick="loadGame('https://github.io')">🧱 1v1.LOL Arena</button>
+            <button class="game-btn" onclick="loadGame('https://deev.is')">⛏️ Eaglercraft 1.8.8</button>
+            <button class="game-btn" onclick="loadGame('https://gitlab.io')">🧠 Steal A Brainrot</button>
+
+            <div class="category-title">🏎️ Racing & Driving</div>
+            <button class="game-btn" onclick="loadGame('https://github.io')">🏎️ Drift Boss</button>
+            <button class="game-btn" onclick="loadGame('https://github.io')">🚗 Eggy Car</button>
+            <button class="game-btn" onclick="loadGame('https://gitlab.io')">🏍️ Moto X3M Bike</button>
+            <button class="game-btn" onclick="loadGame('https://github.io')">🛻 Drive Mad</button>
+            <button class="game-btn" onclick="loadGame('https://github.io')">🛷 Snow Rider 3D</button>
+            <button class="game-btn" onclick="loadGame('https://github.io')">🧌 Mad Truck</button>
+            <button class="game-btn" onclick="loadGame('https://github.io')">🔄 G-Switch 3</button>
+            <button class="game-btn" onclick="loadGame('https://github.io')">🌌 Cyber Cars</button>
+
+            <div class="category-title">👵 Horror & Survival</div>
+            <button class="game-btn" onclick="loadGame('https://gitlab.io')">👵 Granny Horror</button>
+            <button class="game-btn" onclick="loadGame('https://gitlab.io')">🥔 Brotato Survival</button>
+            <button class="game-btn" onclick="loadGame('https://github.io')">👾 Space Huggers</button>
+            <button class="game-btn" onclick="loadGame('https://github.io')">🧟 Zombs Royale</button>
+            <button class="game-btn" onclick="loadGame('https://github.io')">🐻 FNAF 1</button>
+            <button class="game-btn" onclick="loadGame('https://github.io')">🐰 FNAF 2</button>
+            <button class="game-btn" onclick="loadGame('https://github.io')">🌲 Slendrina</button>
+
+            <div class="category-title">🏃 Runners & Physics</div>
+            <button class="game-btn" onclick="loadGame('https://github.io')">🟢 Slope 3D Ball</button>
+            <button class="game-btn" onclick="loadGame('https://github.io')">🏃 Run 3 Tunnel</button>
+            <button class="game-btn" onclick="loadGame('https://github.io')">🛹 Subway Surfers</button>
+            <button class="game-btn" onclick="loadGame('https://github.io')">🚀 Doodle Jump</button>
+            <button class="game-btn" onclick="loadGame('https://github.io')">🏃 Temple Run 2</button>
+            <button class="game-btn" onclick="loadGame('https://github.io')">🪝 Stickman Hook</button>
+            <button class="game-btn" onclick="loadGame('https://github.io')">🧗 Vex 4</button>
+            <button class="game-btn" onclick="loadGame('https://github.io')">🧗 Vex 5</button>
+            <button class="game-btn" onclick="loadGame('https://github.io')">🚲 Happy Wheels</button>
+
+            <div class="category-title">🏈 Sports Classics</div>
+            <button class="game-btn" onclick="loadGame('https://github.io')">🏈 Retro Bowl</button>
+            <button class="game-btn" onclick="loadGame('https://github.io')">🏀 Basketball Stars</button>
+            <button class="game-btn" onclick="loadGame('https://github.io')">⚽ Soccer Physics</button>
+            <button class="game-btn" onclick="loadGame('https://github.io')">🏀 Basketball Legends</button>
+            <button class="game-btn" onclick="loadGame('https://github.io')">⚽ Football Legends</button>
+            <button class="game-btn" onclick="loadGame('https://github.io')">🎓 Retro Bowl College</button>
+            <button class="game-btn" onclick="loadGame('https://github.io')">🏒 Blades of Steel</button>
+
+            <div class="category-title">🧱 Arcade & Retro</div>
+            <button class="game-btn" onclick="loadGame('https://github.io')">🧱 Retro Tetris</button>
+            <button class="game-btn" onclick="loadGame('https://github.io')">🟡 Classic Pac-Man</button>
+            <button class="game-btn" onclick="loadGame('https://github.io')">🐔 Crossy Road</button>
+            <button class="game-btn" onclick="loadGame('https://github.io')">🍄 Super Mario Bros.</button>
+            <button class="game-btn" onclick="loadGame('https://github.io')">🦔 Sonic</button>
+            <button class="game-btn" onclick="loadGame('https://github.io')">🛸 Galaga</button>
+            <button class="game-btn" onclick="loadGame('https://github.io')">🪨 Asteroids</button>
+            <button class="game-btn" onclick="loadGame('https://github.io')">👽 Space Invaders</button>
+
+            <div class="category-title">📈 Clickers & Fun</div>
+            <button class="game-btn" onclick="loadGame('https://github.io')">🍪 Cookie Clicker</button>
+            <button class="game-btn" onclick="loadGame('https://github.io')">💼 BitLife</button>
+            <button class="game-btn" onclick="loadGame('https://github.io')">📄 Paper.io 2</button>

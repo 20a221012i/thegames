@@ -3,213 +3,223 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desmos | Graphing Calculator</title> <!-- Safe low-profile title -->
+    <title>Desmos | Graphing Calculator</title> <!-- Fake title for safety -->
     <link id="favicon" rel="icon" type="image/x-icon" href="https://gstatic.com"> <!-- Classroom Tab Icon -->
     <style>
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
         body { 
-            background-color: #0b0c10; 
-            color: #c5c6c7; 
+            background-color: #0d0e12; 
+            color: #e2e8f0; 
             font-family: 'Segoe UI', Roboto, sans-serif; 
-            margin: 0; 
-            padding: 30px 10px;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center; /* Completely centers the entire platform grid */
-            min-height: 100vh;
+            align-items: center;
             overflow-x: hidden;
         }
 
-        /* Centered Header Panel */
-        .header-panel {
+        /* Centered Header Dashboard */
+        .dashboard-header {
             width: 100%;
-            max-width: 1200px;
+            max-width: 1000px;
             text-align: center;
-            margin-bottom: 40px;
-            padding: 25px;
-            background: #1f2833;
-            border-radius: 16px;
-            border: 2px solid #45f3ff;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+            padding: 30px 20px;
+            margin-top: 20px;
+            background: #1a1c23;
+            border-radius: 20px;
+            border: 1px solid #00f2fe;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
         }
 
-        .header-panel h1 {
-            color: #66fcf1;
-            font-size: 2.6rem;
-            margin: 0 0 15px 0;
-            text-shadow: 0 0 10px rgba(102, 252, 241, 0.4);
+        .dashboard-header h1 {
+            color: #00f2fe;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
         }
 
         .btn-cloak {
             background: #ff007f;
             color: white;
             border: none;
-            padding: 10px 22px;
+            padding: 10px 24px;
             font-weight: bold;
-            border-radius: 8px;
+            border-radius: 30px;
             cursor: pointer;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 15px rgba(255,0,127,0.3);
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(255, 0, 127, 0.4);
             transition: 0.2s;
         }
-        .btn-cloak:hover { transform: scale(1.03); background: #ff3399; }
+        .btn-cloak:hover { transform: scale(1.05); background: #ff3399; }
 
+        /* Sleek Centered Search Bar */
+        .search-container { width: 100%; display: flex; justify-content: center; }
         #searchBar {
-            width: 95%;
-            max-width: 650px;
-            padding: 15px 25px;
+            width: 90%;
+            max-width: 500px;
+            padding: 14px 25px;
             font-size: 1.1rem;
             border-radius: 30px;
-            border: 2px solid #45f3ff;
-            background: #0b0c10;
+            border: 2px solid #334155;
+            background: #090a0f;
             color: white;
             outline: none;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
+            transition: 0.3s;
+        }
+        #searchBar:focus { border-color: #00f2fe; box-shadow: 0 0 15px rgba(0, 242, 254, 0.3); }
+
+        /* The Main Center Menu Grid */
+        .menu-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+            gap: 20px; 
+            width: 100%;
+            max-width: 1000px; 
+            padding: 40px 20px;
         }
 
-        /* Clean Central Grid Layout */
-        .game-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); 
-            gap: 40px; 
-            width: 100%;
-            max-width: 1400px; 
-            justify-content: center;
-            margin: 0 auto;
-        }
-        @media (max-width: 600px) { .game-grid { grid-template-columns: 1fr; } }
-        
-        /* Prominent Centered Cards */
+        /* Clean Clickable Game Cards */
         .game-card { 
-            background: #1f2833; 
-            padding: 20px; 
+            background: #1a1c23; 
+            padding: 25px 15px; 
             border-radius: 16px; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.6); 
-            border: 1px solid #2a3542; 
-            display: flex; 
-            flex-direction: column; 
-            transition: transform 0.3s, border 0.3s;
+            text-align: center;
+            border: 1px solid #2d3748;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
         }
         .game-card:hover {
             transform: translateY(-5px);
-            border: 1px solid #45f3ff;
-            box-shadow: 0 12px 30px rgba(102, 252, 241, 0.2);
+            border-color: #00f2fe;
+            box-shadow: 0 10px 20px rgba(0, 242, 254, 0.2);
+            background: #222531;
         }
-        .game-card h2 { 
-            color: #66fcf1; 
-            font-size: 1.5rem; 
-            margin-top: 0; 
-            margin-bottom: 15px; 
-            text-align: left;
+        .game-card .icon { font-size: 2.5rem; margin-bottom: 12px; display: inline-block; }
+        .game-card h3 { color: #ffffff; font-size: 1.2rem; font-weight: 600; }
+
+        /* Fullscreen Isolated Game Theater Mode */
+        .player-container {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: #000000;
+            z-index: 9999;
+            flex-direction: column;
         }
-        .game-frame { 
-            width: 100%; 
-            height: 500px; 
-            border: 3px solid #0b0c10; 
-            border-radius: 10px; 
-            background: #000; 
+        .player-bar {
+            background: #1a1c23;
+            height: 50px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            border-bottom: 2px solid #00f2fe;
         }
+        .player-title { color: #00f2fe; font-weight: bold; font-size: 1.1rem; }
+        .btn-back {
+            background: #334155;
+            color: white;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .btn-back:hover { background: #475569; }
+        .game-frame { width: 100%; flex: 1; border: none; background: #000; }
     </style>
 </head>
 <body>
 
-    <!-- CENTRESET MANAGEMENT CONSOLE -->
-    <div class="header-panel">
-        <h1>⚡ CENTRAL ARCADE ENGINE ⚡</h1>
-        <button class="btn-cloak" onclick="cloakTab()">⚠️ EMERGENCY CLOAK TAB</button>
-        <br>
-        <input type="text" id="searchBar" onkeyup="filterGames()" placeholder="Type to filter central games instantly...">
+    <!-- CENTRED HUB OVERVIEW -->
+    <div id="mainDashboard" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+        <div class="dashboard-header">
+            <h1>ARCADE PROTOCOL</h1>
+            <button class="btn-cloak" onclick="cloakTab()">⚠️ EMERGENCY CLOAK TAB</button>
+            <div class="search-container">
+                <input type="text" id="searchBar" onkeyup="filterGames()" placeholder="Search available engines...">
+            </div>
+        </div>
+
+        <!-- MAIN CENTRED MENU LINKS -->
+        <div class="menu-grid" id="menuGrid">
+            <div class="game-card" onclick="openGame('⛏️ Eaglercraft 1.12.2', 'https://eaglercraft.ir')">
+                <span class="icon">⛏️</span><h3>Minecraft 1.12.2</h3>
+            </div>
+            <div class="game-card" onclick="openGame('🪂 Fortzone BR', 'https://gitlab.io')">
+                <span class="icon">🪂</span><h3>Fortzone BR</h3>
+            </div>
+            <div class="game-card" onclick="openGame('👵 Granny Horror', 'https://gitlab.io')">
+                <span class="icon">👵</span><h3>Granny Horror</h3>
+            </div>
+            <div class="game-card" onclick="openGame('🥔 Brotato', 'https://gitlab.io')">
+                <span class="icon">🥔</span><h3>Brotato</h3>
+            </div>
+            <div class="game-card" onclick="openGame('🧠 Steal A Brainrot', 'https://gitlab.io')">
+                <span class="icon">🧠</span><h3>Steal A Brainrot</h3>
+            </div>
+            <div class="game-card" onclick="openGame('🏎️ Drift Boss', 'https://github.io')">
+                <span class="icon">🏎️</span><h3>Drift Boss</h3>
+            </div>
+            <div class="game-card" onclick="openGame('🧱 1v1.LOL', 'https://github.io')">
+                <span class="icon">🧱</span><h3>1v1.LOL</h3>
+            </div>
+            <div class="game-card" onclick="openGame('🏈 Retro Bowl', 'https://github.io')">
+                <span class="icon">🏈</span><h3>Retro Bowl</h3>
+            </div>
+            <div class="game-card" onclick="openGame('🟢 Slope 3D', 'https://github.io')">
+                <span class="icon">🟢</span><h3>Slope 3D</h3>
+            </div>
+            <div class="game-card" onclick="openGame('🛹 Subway Surfers', 'https://github.io')">
+                <span class="icon">🛹</span><h3>Subway Surfers</h3>
+            </div>
+        </div>
     </div>
 
-    <!-- MAIN CENTRED ARCADES GRID -->
-    <div class="game-grid" id="gameGrid">
-
-        <!-- 1. EAGLERCRAFT 1.12.2 -->
-        <div class="game-card">
-            <h2>⛏️ EaglercraftX (Minecraft 1.12.2 Edition)</h2>
-            <!-- Upgraded to stable 1.12 web framework -->
-            <iframe class="game-frame" src="https://eaglercraft.ir" allow="fullscreen; autoplay; gamepad; microphone"></iframe>
+    <!-- FULLSCREEN SYSTEM INTERFACE RUNTIME -->
+    <div id="playerContainer" class="player-container">
+        <div class="player-bar">
+            <span id="playerTitle" class="player-title">Loading Protocol...</span>
+            <button class="btn-back" onclick="closeGame()">↩️ CLOSE GAME</button>
         </div>
-
-        <!-- 2. FORTZONE (FORTNITE STYLE) -->
-        <div class="game-card">
-            <h2>🪂 Fortzone BR (Battle Royale)</h2>
-            <iframe class="game-frame" src="https://gitlab.io" allow="fullscreen; autoplay; gamepad"></iframe>
-        </div>
-
-        <!-- 3. GRANNY -->
-        <div class="game-card">
-            <h2>👵 Granny (Horror Escape)</h2>
-            <iframe class="game-frame" src="https://gitlab.io" allow="fullscreen"></iframe>
-        </div>
-
-        <!-- 4. BROTATO -->
-        <div class="game-card">
-            <h2>🥔 Brotato (Survival Roguelite)</h2>
-            <iframe class="game-frame" src="https://gitlab.io" allow="fullscreen"></iframe>
-        </div>
-
-        <!-- 5. STEAL A BRAINROT -->
-        <div class="game-card">
-            <h2>🧠 Steal A Brainrot Duel</h2>
-            <iframe class="game-frame" src="https://gitlab.io" allow="fullscreen"></iframe>
-        </div>
-
-        <!-- 6. DRIFT BOSS -->
-        <div class="game-card">
-            <h2>🏎️ Drift Boss (High-Speed Racing)</h2>
-            <iframe class="game-frame" src="https://github.io" allow="fullscreen"></iframe>
-        </div>
-
-        <!-- 7. 1V1.LOL -->
-        <div class="game-card">
-            <h2>🧱 1v1.LOL (Build & Practice)</h2>
-            <iframe class="game-frame" src="https://github.io" allow="fullscreen"></iframe>
-        </div>
-
-        <!-- 8. RETRO BOWL -->
-        <div class="game-card">
-            <h2>🏈 Retro Bowl (Gridiron Football)</h2>
-            <iframe class="game-frame" src="https://github.io" allow="fullscreen"></iframe>
-        </div>
-
-        <!-- 9. SLOPE -->
-        <div class="game-card">
-            <h2>🟢 Slope (3D Physics Ball)</h2>
-            <iframe class="game-frame" src="https://github.io" allow="fullscreen"></iframe>
-        </div>
-
-        <!-- 10. SUBWAY SURFERS -->
-        <div class="game-card">
-            <h2>🛹 Subway Surfers (Hoverboard Run)</h2>
-            <iframe class="game-frame" src="https://github.io" allow="fullscreen"></iframe>
-        </div>
-
+        <iframe id="gameFrame" class="game-frame" allow="fullscreen; autoplay; gamepad; microphone"></iframe>
     </div>
 
     <script>
-        // Emergency Tab Disguise
+        // Smooth Screen Transits
+        function openGame(title, url) {
+            document.getElementById("mainDashboard").style.display = "none";
+            document.getElementById("playerContainer").style.display = "flex";
+            document.getElementById("playerTitle").innerText = title;
+            document.getElementById("gameFrame").src = url;
+        }
+
+        function closeGame() {
+            document.getElementById("playerContainer").style.display = "none";
+            document.getElementById("mainDashboard").style.display = "flex";
+            document.getElementById("gameFrame").src = ""; // Stop loading overhead
+        }
+
+        // Tab Hide Execution
         function cloakTab() {
             document.title = "Google Classroom";
             document.getElementById("favicon").setAttribute("href", "https://gstatic.com");
-            alert("Tab cloaked into Google Classroom!");
+            alert("Tab disguised as Google Classroom!");
         }
 
-        // Live Dashboard Sorting Engine
+        // Grid Menu Search Algorithm
         function filterGames() {
             let input = document.getElementById('searchBar').value.toLowerCase();
             let cards = document.getElementsByClassName('game-card');
-            
             for (let i = 0; i < cards.length; i++) {
-                let title = cards[i].getElementsByTagName('h2')[0].innerText.toLowerCase();
-                if (title.includes(input)) {
-                    cards[i].style.display = "";
-                } else {
-                    cards[i].style.display = "none";
-                }
+                let text = cards[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
+                cards[i].style.display = text.includes(input) ? "" : "none";
             }
         }
     </script>
-
 </body>
 </html>

@@ -3,223 +3,220 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desmos | Graphing Calculator</title> <!-- Fake title for safety -->
+    <title>Desmos | Graphing Calculator</title> <!-- Stealth Title -->
     <link id="favicon" rel="icon" type="image/x-icon" href="https://gstatic.com"> <!-- Classroom Tab Icon -->
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body { 
-            background-color: #0d0e12; 
-            color: #e2e8f0; 
-            font-family: 'Segoe UI', Roboto, sans-serif; 
+            background-color: #08090c; 
+            color: #f1f5f9; 
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; 
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: center; /* Centers everything straight down the middle */
+            padding: 20px;
             overflow-x: hidden;
         }
 
-        /* Centered Header Dashboard */
-        .dashboard-header {
+        /* Fully Centered Dashboard Control Panel */
+        .arcade-hub {
             width: 100%;
-            max-width: 1000px;
+            max-width: 1100px;
             text-align: center;
-            padding: 30px 20px;
-            margin-top: 20px;
-            background: #1a1c23;
-            border-radius: 20px;
-            border: 1px solid #00f2fe;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+            padding: 35px 20px;
+            margin: 20px 0 40px 0;
+            background: #111827;
+            border-radius: 24px;
+            border: 2px solid #06b6d4;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
         }
 
-        .dashboard-header h1 {
-            color: #00f2fe;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            letter-spacing: 2px;
-            text-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+        .arcade-hub h1 {
+            color: #06b6d4;
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
         }
 
-        .btn-cloak {
-            background: #ff007f;
+        .btn-panic {
+            background: #ef4444;
             color: white;
             border: none;
-            padding: 10px 24px;
+            padding: 12px 28px;
+            font-size: 1rem;
             font-weight: bold;
-            border-radius: 30px;
+            border-radius: 50px;
             cursor: pointer;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(255, 0, 127, 0.4);
-            transition: 0.2s;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 20px rgba(239, 68, 68, 0.4);
+            transition: all 0.2s ease;
         }
-        .btn-cloak:hover { transform: scale(1.05); background: #ff3399; }
+        .btn-panic:hover { transform: scale(1.04); background: #f87171; }
 
-        /* Sleek Centered Search Bar */
-        .search-container { width: 100%; display: flex; justify-content: center; }
+        /* The Main Search Box */
+        .search-wrapper { width: 100%; display: flex; justify-content: center; }
         #searchBar {
-            width: 90%;
-            max-width: 500px;
-            padding: 14px 25px;
+            width: 100%;
+            max-width: 550px;
+            padding: 16px 28px;
             font-size: 1.1rem;
-            border-radius: 30px;
-            border: 2px solid #334155;
-            background: #090a0f;
+            border-radius: 40px;
+            border: 2px solid #374151;
+            background: #030712;
             color: white;
             outline: none;
-            transition: 0.3s;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.6);
         }
-        #searchBar:focus { border-color: #00f2fe; box-shadow: 0 0 15px rgba(0, 242, 254, 0.3); }
+        #searchBar:focus { border-color: #06b6d4; box-shadow: 0 0 20px rgba(6, 182, 212, 0.3); }
 
-        /* The Main Center Menu Grid */
-        .menu-grid { 
+        /* Centered Grid holding the massive game cards */
+        .cards-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
-            gap: 20px; 
+            grid-template-columns: repeat(auto-fit, minmax(480px, 1fr)); 
+            gap: 40px; 
             width: 100%;
-            max-width: 1000px; 
-            padding: 40px 20px;
+            max-width: 1200px; 
+            justify-content: center;
+            margin: 0 auto;
         }
-
-        /* Clean Clickable Game Cards */
-        .game-card { 
-            background: #1a1c23; 
-            padding: 25px 15px; 
-            border-radius: 16px; 
-            text-align: center;
-            border: 1px solid #2d3748;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+        @media (max-width: 550px) { .cards-grid { grid-template-columns: 1fr; } }
+        
+        /* Individual Large Game Windows */
+        .game-panel { 
+            background: #1f2937; 
+            padding: 22px; 
+            border-radius: 20px; 
+            box-shadow: 0 12px 30px rgba(0,0,0,0.6); 
+            border: 1px solid #374151; 
+            display: flex; 
+            flex-direction: column; 
+            transition: transform 0.3s ease, border-color 0.3s ease;
         }
-        .game-card:hover {
-            transform: translateY(-5px);
-            border-color: #00f2fe;
-            box-shadow: 0 10px 20px rgba(0, 242, 254, 0.2);
-            background: #222531;
+        .game-panel:hover {
+            transform: translateY(-6px);
+            border-color: #06b6d4;
+            box-shadow: 0 15px 35px rgba(6, 182, 212, 0.15);
         }
-        .game-card .icon { font-size: 2.5rem; margin-bottom: 12px; display: inline-block; }
-        .game-card h3 { color: #ffffff; font-size: 1.2rem; font-weight: 600; }
-
-        /* Fullscreen Isolated Game Theater Mode */
-        .player-container {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: #000000;
-            z-index: 9999;
-            flex-direction: column;
+        .game-panel h2 { 
+            color: #06b6d4; 
+            font-size: 1.5rem; 
+            margin-bottom: 15px; 
+            text-align: left;
+            font-weight: 600;
         }
-        .player-bar {
-            background: #1a1c23;
-            height: 50px;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 20px;
-            border-bottom: 2px solid #00f2fe;
+        .window-frame { 
+            width: 100%; 
+            height: 520px; 
+            border: 4px solid #030712; 
+            border-radius: 12px; 
+            background: #000000; 
         }
-        .player-title { color: #00f2fe; font-weight: bold; font-size: 1.1rem; }
-        .btn-back {
-            background: #334155;
-            color: white;
-            border: none;
-            padding: 6px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        .btn-back:hover { background: #475569; }
-        .game-frame { width: 100%; flex: 1; border: none; background: #000; }
     </style>
 </head>
 <body>
 
-    <!-- CENTRED HUB OVERVIEW -->
-    <div id="mainDashboard" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
-        <div class="dashboard-header">
-            <h1>ARCADE PROTOCOL</h1>
-            <button class="btn-cloak" onclick="cloakTab()">⚠️ EMERGENCY CLOAK TAB</button>
-            <div class="search-container">
-                <input type="text" id="searchBar" onkeyup="filterGames()" placeholder="Search available engines...">
-            </div>
-        </div>
-
-        <!-- MAIN CENTRED MENU LINKS -->
-        <div class="menu-grid" id="menuGrid">
-            <div class="game-card" onclick="openGame('⛏️ Eaglercraft 1.12.2', 'https://eaglercraft.ir')">
-                <span class="icon">⛏️</span><h3>Minecraft 1.12.2</h3>
-            </div>
-            <div class="game-card" onclick="openGame('🪂 Fortzone BR', 'https://gitlab.io')">
-                <span class="icon">🪂</span><h3>Fortzone BR</h3>
-            </div>
-            <div class="game-card" onclick="openGame('👵 Granny Horror', 'https://gitlab.io')">
-                <span class="icon">👵</span><h3>Granny Horror</h3>
-            </div>
-            <div class="game-card" onclick="openGame('🥔 Brotato', 'https://gitlab.io')">
-                <span class="icon">🥔</span><h3>Brotato</h3>
-            </div>
-            <div class="game-card" onclick="openGame('🧠 Steal A Brainrot', 'https://gitlab.io')">
-                <span class="icon">🧠</span><h3>Steal A Brainrot</h3>
-            </div>
-            <div class="game-card" onclick="openGame('🏎️ Drift Boss', 'https://github.io')">
-                <span class="icon">🏎️</span><h3>Drift Boss</h3>
-            </div>
-            <div class="game-card" onclick="openGame('🧱 1v1.LOL', 'https://github.io')">
-                <span class="icon">🧱</span><h3>1v1.LOL</h3>
-            </div>
-            <div class="game-card" onclick="openGame('🏈 Retro Bowl', 'https://github.io')">
-                <span class="icon">🏈</span><h3>Retro Bowl</h3>
-            </div>
-            <div class="game-card" onclick="openGame('🟢 Slope 3D', 'https://github.io')">
-                <span class="icon">🟢</span><h3>Slope 3D</h3>
-            </div>
-            <div class="game-card" onclick="openGame('🛹 Subway Surfers', 'https://github.io')">
-                <span class="icon">🛹</span><h3>Subway Surfers</h3>
-            </div>
+    <!-- MAIN DASHBOARD PANEL -->
+    <div class="arcade-hub">
+        <h1>⚡ ARCADE MATRIX CORE ⚡</h1>
+        <button class="btn-panic" onclick="activateCloak()">⚠️ EMERGENCY CLOAK TAB</button>
+        <div class="search-wrapper">
+            <input type="text" id="searchBar" onkeyup="runLiveSearch()" placeholder="Type game keywords to scan network...">
         </div>
     </div>
 
-    <!-- FULLSCREEN SYSTEM INTERFACE RUNTIME -->
-    <div id="playerContainer" class="player-container">
-        <div class="player-bar">
-            <span id="playerTitle" class="player-title">Loading Protocol...</span>
-            <button class="btn-back" onclick="closeGame()">↩️ CLOSE GAME</button>
+    <!-- MAIN CENTERED ARCADES GRID -->
+    <div class="cards-grid" id="cardsGrid">
+
+        <!-- 1. EAGLERCRAFT MINECRAFT 1.12.2 -->
+        <div class="game-panel">
+            <h2>⛏️ EaglercraftX (Minecraft 1.12.2 Stable Engine)</h2>
+            <iframe class="window-frame" src="https://eaglercraft.ir" allow="fullscreen; autoplay; gamepad; microphone"></iframe>
         </div>
-        <iframe id="gameFrame" class="game-frame" allow="fullscreen; autoplay; gamepad; microphone"></iframe>
+
+        <!-- 2. FORTZONE BATTLE ROYALE -->
+        <div class="game-panel">
+            <h2>🪂 Fortzone BR (Meme Royale)</h2>
+            <iframe class="window-frame" src="https://gitlab.io" allow="fullscreen; autoplay; gamepad"></iframe>
+        </div>
+
+        <!-- 3. GRANNY HORROR -->
+        <div class="game-panel">
+            <h2>👵 Granny (Horror Survival Escape)</h2>
+            <iframe class="window-frame" src="https://gitlab.io" allow="fullscreen"></iframe>
+        </div>
+
+        <!-- 4. BROTATO -->
+        <div class="game-panel">
+            <h2>🥔 Brotato (Vampire Style Roguelite)</h2>
+            <iframe class="window-frame" src="https://gitlab.io" allow="fullscreen"></iframe>
+        </div>
+
+        <!-- 5. STEAL A BRAINROT -->
+        <div class="game-panel">
+            <h2>🧠 Steal A Brainrot Duel (Meme Run)</h2>
+            <iframe class="window-frame" src="https://gitlab.io" allow="fullscreen"></iframe>
+        </div>
+
+        <!-- 6. DRIFT BOSS -->
+        <div class="game-panel">
+            <h2>🏎️ Drift Boss (High-Speed Curve Racer)</h2>
+            <iframe class="window-frame" src="https://github.io" allow="fullscreen"></iframe>
+        </div>
+
+        <!-- 7. 1V1.LOL -->
+        <div class="game-panel">
+            <h2>🧱 1v1.LOL (Fortnite Building Trainer)</h2>
+            <iframe class="window-frame" src="https://github.io" allow="fullscreen"></iframe>
+        </div>
+
+        <!-- 8. RETRO BOWL -->
+        <div class="game-panel">
+            <h2>🏈 Retro Bowl (Gridiron Football Simulator)</h2>
+            <iframe class="window-frame" src="https://github.io" allow="fullscreen"></iframe>
+        </div>
+
+        <!-- 9. SLOPE -->
+        <div class="game-panel">
+            <h2>🟢 Slope (3D Neon Sphere Runner)</h2>
+            <iframe class="window-frame" src="https://github.io" allow="fullscreen"></iframe>
+        </div>
+
+        <!-- 10. SUBWAY SURFERS -->
+        <div class="game-panel">
+            <h2>🛹 Subway Surfers (Endless Train Run)</h2>
+            <iframe class="window-frame" src="https://github.io" allow="fullscreen"></iframe>
+        </div>
+
     </div>
 
     <script>
-        // Smooth Screen Transits
-        function openGame(title, url) {
-            document.getElementById("mainDashboard").style.display = "none";
-            document.getElementById("playerContainer").style.display = "flex";
-            document.getElementById("playerTitle").innerText = title;
-            document.getElementById("gameFrame").src = url;
-        }
-
-        function closeGame() {
-            document.getElementById("playerContainer").style.display = "none";
-            document.getElementById("mainDashboard").style.display = "flex";
-            document.getElementById("gameFrame").src = ""; // Stop loading overhead
-        }
-
-        // Tab Hide Execution
-        function cloakTab() {
+        // Panic Tab Hider Execution
+        function activateCloak() {
             document.title = "Google Classroom";
             document.getElementById("favicon").setAttribute("href", "https://gstatic.com");
-            alert("Tab disguised as Google Classroom!");
+            alert("Tab cloaked into Google Classroom!");
         }
 
-        // Grid Menu Search Algorithm
-        function filterGames() {
+        // Real-Time Core Search Filter System
+        function runLiveSearch() {
             let input = document.getElementById('searchBar').value.toLowerCase();
-            let cards = document.getElementsByClassName('game-card');
-            for (let i = 0; i < cards.length; i++) {
-                let text = cards[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
-                cards[i].style.display = text.includes(input) ? "" : "none";
+            let panels = document.getElementsByClassName('game-panel');
+            
+            for (let i = 0; i < panels.length; i++) {
+                let textTitle = panels[i].getElementsByTagName('h2')[0].innerText.toLowerCase();
+                if (textTitle.includes(input)) {
+                    panels[i].style.display = "";
+                } else {
+                    panels[i].style.display = "none";
+                }
             }
         }
     </script>
+
 </body>
 </html>
